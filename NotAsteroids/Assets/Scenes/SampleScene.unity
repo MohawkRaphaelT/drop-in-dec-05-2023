@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2803669071725060851, guid: 706f5058c6c14d64baaec6cf3cce5bb0, type: 3}
-  bulletForce: 3
+  bulletForce: 5
   bulletLifetime: 20
 --- !u!1 &1825495666
 GameObject:
