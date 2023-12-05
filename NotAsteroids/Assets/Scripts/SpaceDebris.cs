@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpaceDebris : MonoBehaviour
 {
+    private int splitCount;
+
     void Start()
     {
         float x = Random.Range(-27f, 27f);
@@ -13,6 +15,19 @@ public class SpaceDebris : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+            SplitThisObject();
+    }
+
+    void SplitThisObject()
+    {
+        GameObject clone1 = Instantiate(gameObject);
+        GameObject clone2 = Instantiate(gameObject);
+        clone1.transform.localScale = clone1.transform.localScale / 2f;
+        clone2.transform.localScale = clone2.transform.localScale / 2f;
+        clone1.GetComponent<SpaceDebris>().splitCount++;
+        clone2.GetComponent<SpaceDebris>().splitCount++;
+
+        Destroy(gameObject);
     }
 }
