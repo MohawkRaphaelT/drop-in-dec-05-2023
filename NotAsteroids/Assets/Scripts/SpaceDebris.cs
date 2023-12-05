@@ -13,10 +13,10 @@ public class SpaceDebris : MonoBehaviour
         transform.position = new Vector3(x, y, 0);
     }
 
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            SplitThisObject();
+        SplitThisObject();
+        Destroy(collision.gameObject);
     }
 
     void SplitThisObject()

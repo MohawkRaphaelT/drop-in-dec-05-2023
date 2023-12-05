@@ -313,6 +313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2803669071725060851, guid: 706f5058c6c14d64baaec6cf3cce5bb0, type: 3}
+  bulletForce: 3
+  bulletLifetime: 20
 --- !u!1 &1825495666
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +328,7 @@ GameObject:
   - component: {fileID: 1825495669}
   - component: {fileID: 1825495670}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: SpaceDebris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
