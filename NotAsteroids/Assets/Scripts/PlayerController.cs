@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    new public Rigidbody2D rigidbody2D;
     public GameObject bullet;
     public float bulletForce = 3f;
     public float bulletLifetime = 20f;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         bool rotateCCW = Input.GetKey(KeyCode.A);
         bool rotateCW = Input.GetKey(KeyCode.D);
@@ -29,12 +30,14 @@ public class PlayerController : MonoBehaviour
         if (rotateCW)
             rotation -= 90 * Time.deltaTime;
 
-        transform.rotation =
-            Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + rotation);
+        rigidbody2D.SetRotation(transform.rotation.eulerAngles.z + rotation);
 
         // Translate
         if (doAccel)
-            transform.position += transform.up * 5f * Time.deltaTime;
+        {
+            Vector3 position = transform.position + transform.up * 5f * Time.deltaTime;
+            rigidbody2D.MovePosition(position);
+        }
 
         // Shoot
         if (doShoot)
