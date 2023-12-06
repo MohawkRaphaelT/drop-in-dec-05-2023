@@ -9,18 +9,34 @@ public class PlayerController : MonoBehaviour
     public float bulletForce = 3f;
     public float bulletLifetime = 20f;
 
-    void Start()
-    {
-        
-    }
+    public KeyCode keyRotateCCW = KeyCode.A;
+    public KeyCode keyRotateCW = KeyCode.D;
+    public KeyCode keyAccel = KeyCode.W;
+    public KeyCode keyShoot = KeyCode.Space;
 
+
+    private void Update()
+    {
+        bool doShoot = Input.GetKeyDown(keyShoot);
+
+        // Shoot
+        if (doShoot)
+        {
+            Vector3 position = transform.position + transform.up;
+            GameObject bulletInstance = Instantiate(bullet, position, Quaternion.identity);
+
+            Rigidbody2D rigidbody = bulletInstance.GetComponent<Rigidbody2D>();
+            rigidbody.AddForce(transform.up * bulletForce, ForceMode2D.Impulse);
+
+            Destroy(bulletInstance, bulletLifetime);
+        }
+    }
 
     void FixedUpdate()
     {
-        bool rotateCCW = Input.GetKey(KeyCode.A);
-        bool rotateCW = Input.GetKey(KeyCode.D);
-        bool doAccel = Input.GetKey(KeyCode.W);
-        bool doShoot = Input.GetKeyDown(KeyCode.Space);
+        bool rotateCCW = Input.GetKey(keyRotateCCW);
+        bool rotateCW = Input.GetKey(keyRotateCW);
+        bool doAccel = Input.GetKey(keyAccel);
 
         // Rotate
         float rotation = 0;
@@ -37,18 +53,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 position = transform.position + transform.up * 5f * Time.deltaTime;
             rigidbody2D.MovePosition(position);
-        }
-
-        // Shoot
-        if (doShoot)
-        {
-            Vector3 position = transform.position + transform.up;
-            GameObject bulletInstance = Instantiate(bullet, position, Quaternion.identity);
-            
-            Rigidbody2D rigidbody = bulletInstance.GetComponent<Rigidbody2D>();
-            rigidbody.AddForce(transform.up * bulletForce, ForceMode2D.Impulse);
-
-            Destroy(bulletInstance, bulletLifetime);
         }
     }
 }
